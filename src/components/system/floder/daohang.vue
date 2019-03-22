@@ -1,5 +1,15 @@
 <template>
-	<div class="daohang" v-drag>
+	<div class="daohang" v-drag v-if="drag">
+		<div class="con">
+			<div>{{app_name}}</div>
+			<div class="control">
+				<span>小</span>
+				<span>大</span>
+				<span @click="closeapp">&nbsp;X&nbsp;</span>
+			</div>
+		</div>
+	</div>
+	<div class="daohang" v-else>
 		<div class="con">
 			<div>{{app_name}}</div>
 			<div class="control">

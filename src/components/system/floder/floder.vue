@@ -1,6 +1,6 @@
 <template>
 	<transition name="message-fade">
-		<div @mousedown="activeapp" :ref="'ref_'+appid" v-if="visible" class="floder" :class="activeApp?'floder-active':''" :style="{'top':top+'px','left':left+'px','zIndex':zIndex}">
+		<div @mousedown="activeapp" :ref="'ref_'+appid" v-if="visible" class="floder" :class="activeApp?'floder-active':''" :style="{width:width+'px',height:height+'px','top':top+'px','left':left+'px','zIndex':zIndex}">
 			<changesize></changesize>
 			<daohang :drag="true" @closeapp="close" :app_name="app_name"></daohang>
 		</div>
@@ -16,6 +16,8 @@
 		data() {
 			return {
 				visible: false,
+				width: 500,
+				height: 400,
 				top: 0,
 				left: 0,
 				zIndex: 0
@@ -74,8 +76,6 @@
         opacity: 0;
     }
 	.floder {
-		width: 500px;
-		height: 400px;
 		border-radius: 5px;
 		overflow: hidden;
 		background: #fff;

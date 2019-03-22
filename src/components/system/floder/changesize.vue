@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="size size-top" @mousedown="ltr"></div>
+		<div class="size size-top" v-ltr></div>
 		<div class="size size-right"></div>
 		<div class="size size-bottom"></div>
 		<div class="size size-left"></div>
@@ -16,11 +16,43 @@
 	export default {
 		data() {
 			return {
+				
 			}
 		},
-		methods:{
-			ltr(){
-				this.$emit('ltr')
+		directives: {
+			ltr: {
+				inserted: function(el,binding,vnode){
+					el.onmousedown = function(e){
+						var x = e.clientX - el.parentNode.offsetLeft
+						var y = e.clientY - el.parentNode.offsetTop
+						var height = el.parentNode.offsetHeight;
+						var width = el.parentNode.offsetWidth;
+						var windowWidth = window.innerWidth;
+						var windowHeight = window.innerHeight;
+						document.onmousemove = function(e){
+							var _x = e.clientX - x;
+							var _y = e.clientY - y;
+							if (_y <= 0) {
+								_y = 0
+							}
+							if (_x <= 0) {
+								_x = 0
+							}
+							if (_x + width >= windowWidth) {
+								_x = windowWidth - width
+							}
+							if (_y + height >= windowHeight) {
+								_y = windowHeight - height
+							}
+							vnode.context.$parent.top = _y
+							vnode.context.$parent.left = _x
+						}
+						document.onmouseup = function(){
+							document.onmousemove = null
+							document.onmouseup = null
+						}
+					}
+				}
 			}
 		},
 		created(){
