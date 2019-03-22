@@ -17,21 +17,12 @@
 		},
 		methods:{
 			openapp(item){
-				var openId = this.$store.state.windowData.openId
-				var exist = openId.some((b)=>{
-					return b == item.appid
-				})
-				if(exist){
-					// this.$floder(item,this)
-				}else{
-					this.$floder(item,this,true)
-				}
+				this.$floder(item)
 			}
 		},
 		created() {
 			var that = this;
 			this.height = document.body.clientHeight - initData.height
-			console.log(document.body.clientHeight)
 			window.onresize = function() {
 				that.height = document.body.clientHeight - initData.height
 			}
@@ -49,7 +40,8 @@
 		align-content: flex-start;
 
 		.appitem {
-			background: #000;
+			background: rgba(0, 0, 0, .5);
+			border-radius: 20px;
 			color: #fff;
 			width: 100px;
 			height: 100px;

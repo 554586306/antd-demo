@@ -1,36 +1,74 @@
 <template>
-	<div class="daohang" @mousedown="mousedown($event)">
+	<div class="daohang" v-drag>
 		<div class="con">
 			<div>{{app_name}}</div>
 			<div class="control">
 				<span>小</span>
 				<span>大</span>
-				<span @click="closeapp">X</span>
+				<span @click="closeapp">&nbsp;X&nbsp;</span>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+	import store from '../../../store/store.js'
 	export default {
 		props: {
-			app_name: String
+			app_name: String,
+			drag: {
+				type: Boolean,
+				default: true
+			}
 		},
 		data() {
 			return {
-
+				
+			}
+		},
+		directives: {
+			drag: {
+				inserted: function(el,binding,vnode){
+					el.onmousedown = function(e){
+						var x = e.clientX - el.parentNode.offsetLeft
+						var y = e.clientY - el.parentNode.offsetTop
+						var height = el.parentNode.offsetHeight;
+						var width = el.parentNode.offsetWidth;
+						var windowWidth = window.innerWidth;
+						var windowHeight = window.innerHeight;
+						document.onmousemove = function(e){
+							var _x = e.clientX - x;
+							var _y = e.clientY - y;
+							if (_y <= 0) {
+								_y = 0
+							}
+							if (_x <= 0) {
+								_x = 0
+							}
+							if (_x + width >= windowWidth) {
+								_x = windowWidth - width
+							}
+							if (_y + height >= windowHeight) {
+								_y = windowHeight - height
+							}
+							vnode.context.$parent.top = _y
+							vnode.context.$parent.left = _x
+						}
+						document.onmouseup = function(){
+							document.onmousemove = null
+							document.onmouseup = null
+						}
+					}
+				}
 			}
 		},
 		methods: {
-			mousedown(e){
-				this.$emit('mousedown1',e)
-			},
 			closeapp() {
 				this.$emit('closeapp')
 			}
 		},
 		created() {
-			console.log(this.app_name)
+			console.log(this.drag)
 		}
 
 	}
