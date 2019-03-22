@@ -54,6 +54,8 @@
 			}
 		},
 		created() {
+			this.width = 500;
+			this.height = 400;
 			this.top = store.state.windowData.beginTop; //这里修改message.vue数据中的visible,这样message组件就显示出来
 			this.left = store.state.windowData.beginLeft; //这里修改message.vue数据中的visible,这样message组件就显示出来
 			store.commit("windowData/setPosition")
@@ -77,7 +79,6 @@
     }
 	.floder {
 		border-radius: 5px;
-		overflow: hidden;
 		background: #fff;
 		position: absolute;
 		box-shadow: 0px 0px 10px rgba(0,0,0,.1);

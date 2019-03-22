@@ -1,7 +1,7 @@
 <template>
 	<div class="menu-bar" :style="{height:height+'px'}" @click="aaa">
-		<div>
-			
+		<div style="color:aliceblue">
+			{{a}}
 		</div>
 	</div>
 </template>
@@ -13,12 +13,17 @@
 		data() {
 			return {
 				desktopApp: {},
-				height: initData.height
+				height: initData.height,
+				a: 3
 			}
 		},
 		watch:{
-			appmenu:function(a){
-				console.log(a)
+			appmenu:{
+				handler(a){
+					this.a = a
+				},
+				deep: true,
+				immediate: true
 			}
 		},
 		computed:{

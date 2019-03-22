@@ -3,8 +3,8 @@
 		<div class="con">
 			<div>{{app_name}}</div>
 			<div class="control">
-				<span>小</span>
-				<span>大</span>
+				<span @click="minapp">小</span>
+				<span @click="maxapp">大</span>
 				<span @click="closeapp">&nbsp;X&nbsp;</span>
 			</div>
 		</div>
@@ -13,8 +13,8 @@
 		<div class="con">
 			<div>{{app_name}}</div>
 			<div class="control">
-				<span>小</span>
-				<span>大</span>
+				<span @click="minapp">小</span>
+				<span @click="maxapp">大</span>
 				<span @click="closeapp">&nbsp;X&nbsp;</span>
 			</div>
 		</div>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+	import {initData} from '../../../static/js/demo-data.js'
 	import store from '../../../store/store.js'
 	export default {
 		props: {
@@ -33,20 +34,20 @@
 		},
 		data() {
 			return {
-				
+				maxData:{}
 			}
 		},
 		directives: {
 			drag: {
 				inserted: function(el,binding,vnode){
-					el.onmousedown = function(e){
+					var down = function(e) {
 						var x = e.clientX - el.parentNode.offsetLeft
 						var y = e.clientY - el.parentNode.offsetTop
 						var height = el.parentNode.offsetHeight;
 						var width = el.parentNode.offsetWidth;
 						var windowWidth = window.innerWidth;
 						var windowHeight = window.innerHeight;
-						document.onmousemove = function(e){
+						var move = function(e) {
 							var _x = e.clientX - x;
 							var _y = e.clientY - y;
 							if (_y <= 0) {
@@ -64,21 +65,38 @@
 							vnode.context.$parent.top = _y
 							vnode.context.$parent.left = _x
 						}
-						document.onmouseup = function(){
-							document.onmousemove = null
-							document.onmouseup = null
+						var up = function(e) {
+							document.removeEventListener('mousemove',move)
+							document.removeEventListener('mouseup', up)
 						}
+						document.addEventListener('mouseup', up)
+						document.addEventListener('mousemove', move)
 					}
+					el.addEventListener('mousedown', down)
 				}
 			}
 		},
 		methods: {
 			closeapp() {
 				this.$emit('closeapp')
+			},
+			maxapp(){
+				this.maxData = {
+					width: String(this.$parent.width),
+					height: String(this.$parent.height),
+					top: String(this.$parent.top),
+					left: String(this.$parent.left), 
+				}
+				this.$parent.width = window.innerWidth;
+				this.$parent.height = window.innerHeight - initData.height;
+				this.$parent.top = 0;
+				this.$parent.left = 0;
+			},
+			minapp(){
+				console.log('xiao')
 			}
 		},
 		created() {
-			console.log(this.drag)
 		}
 
 	}
@@ -89,7 +107,8 @@
 		height: 50px;
 		background: #999;
 		user-select: none;
-
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
 		.con {
 			display: flex;
 			justify-content: space-between;
