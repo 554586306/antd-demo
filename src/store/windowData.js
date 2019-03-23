@@ -49,12 +49,13 @@ export default {
 					break;
 				}
 			}
-			if (!visible) { // 最小化隐藏，就改变activeApp的num
+			if (visible == false) { // 最小化，就改变activeApp的num
 				var zIndex = -1;
 				var showAppid = -1;
 				for (var i = 0; i < state.openApp.length; i++) {
 					if (state.openApp[i].visible == true) {
 						if(state.openApp[i].zIndex>zIndex){
+							zIndex = state.openApp[i].zIndex
 							showAppid = state.openApp[i].appid
 						}
 					}

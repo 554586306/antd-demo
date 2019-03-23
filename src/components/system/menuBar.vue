@@ -2,7 +2,7 @@
 	<div class="menu-bar" :style="{height:height+'px'}">
 		<div style="width: 50px;"></div>
 		<div class="appicon">
-			<div @click="activeapp(item)" v-for="item in desktopApp" class="item" :class="activeApp==item.appid?'activeApp':''">{{item.app_name}}</div>
+			<div @mousedown="activeapp(item)" v-for="item in desktopApp" class="item" :class="activeApp==item.appid?'activeApp':''">{{item.app_name}}</div>
 		</div>
 	</div>
 </template>

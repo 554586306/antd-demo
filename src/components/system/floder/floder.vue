@@ -30,8 +30,8 @@
 		watch:{
 			activeApp: function(bool){
 				if(bool){
-					store.commit("windowData/setzIndex")
 					this.zIndex = store.state.windowData.zIndex;
+					store.commit("windowData/setzIndex")
 				}
 			}
 		},
