@@ -12,7 +12,7 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		background-image: url(../../static/img/eggs8.jpg);
+		background-image: url(../../static/img/eggs4.jpg);
 		background-size: cover;
 		z-index: -50;
 	}

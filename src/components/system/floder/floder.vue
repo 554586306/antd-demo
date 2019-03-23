@@ -1,5 +1,5 @@
 <template>
-	<transition name="message-fade">
+	<transition name="slidefade">
 		<div @mousedown="activeapp" :ref="'ref_'+appid" v-if="visible" class="floder" :class="activeApp?'floder-active':''" :style="{width:width+'px',height:height+'px','top':top+'px','left':left+'px','zIndex':zIndex}">
 			<changesize></changesize>
 			<daohang :drag="true" @closeapp="close" :app_name="app_name"></daohang>
@@ -70,10 +70,10 @@
 </script>
 
 <style scoped lang="less">
-	.message-fade-enter-active, .message-fade-leave-active {
+	.slidefade-enter-active, .slidefade-leave-active {
         transition: all .3s ease;
     }
-    .message-fade-enter, .message-fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    .slidefade-enter, .slidefade-leave-to { /* .fade-leave-active below version 2.1.8 */ 
         transform: translateY(-20px);
         opacity: 0;
     }

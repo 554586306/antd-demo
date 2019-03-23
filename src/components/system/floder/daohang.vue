@@ -1,15 +1,5 @@
 <template>
-	<div class="daohang" v-drag v-if="drag">
-		<div class="con">
-			<div>{{app_name}}</div>
-			<div class="control">
-				<span @click="minapp">小</span>
-				<span @click="maxapp">大</span>
-				<span @click="closeapp">&nbsp;X&nbsp;</span>
-			</div>
-		</div>
-	</div>
-	<div class="daohang" v-else>
+	<div class="daohang" v-drag="{canIdrag:drag}">
 		<div class="con">
 			<div>{{app_name}}</div>
 			<div class="control">
@@ -34,7 +24,8 @@
 		},
 		data() {
 			return {
-				maxData:{}
+				maxData:{},
+				isMax: false,
 			}
 		},
 		directives: {
@@ -66,6 +57,7 @@
 							vnode.context.$parent.left = _x
 						}
 						var up = function(e) {
+							document.removeEventListener('mousedown',down)
 							document.removeEventListener('mousemove',move)
 							document.removeEventListener('mouseup', up)
 						}
@@ -81,16 +73,25 @@
 				this.$emit('closeapp')
 			},
 			maxapp(){
-				this.maxData = {
-					width: String(this.$parent.width),
-					height: String(this.$parent.height),
-					top: String(this.$parent.top),
-					left: String(this.$parent.left), 
+				if(this.isMax){
+					this.$parent.width = this.maxData.width
+					this.$parent.height = this.maxData.height
+					this.$parent.top = this.maxData.top
+					this.$parent.left = this.maxData.left
+					this.isMax = !this.isMax;
+				}else{
+					this.maxData = {
+						width: String(this.$parent.width),
+						height: String(this.$parent.height),
+						top: String(this.$parent.top),
+						left: String(this.$parent.left), 
+					}
+					this.$parent.width = window.innerWidth;
+					this.$parent.height = window.innerHeight - initData.height;
+					this.$parent.top = 0;
+					this.$parent.left = 0;
+					this.isMax = !this.isMax;
 				}
-				this.$parent.width = window.innerWidth;
-				this.$parent.height = window.innerHeight - initData.height;
-				this.$parent.top = 0;
-				this.$parent.left = 0;
 			},
 			minapp(){
 				console.log('xiao')
@@ -105,8 +106,7 @@
 <style scoped lang="less">
 	.daohang {
 		height: 50px;
-		background: #999;
-		user-select: none;
+		background: url(../../../static/img/eggs4.jpg);
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
 		.con {

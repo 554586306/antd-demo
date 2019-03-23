@@ -30,6 +30,7 @@
 							vnode.context.$parent.width = width - _x
 						}
 						var up = function(e) {
+							document.removeEventListener('mousedown',down)
 							document.removeEventListener('mousemove',move)
 							document.removeEventListener('mouseup', up)
 						}
@@ -49,6 +50,7 @@
 							vnode.context.$parent.width = width + _x
 						}
 						var up = function(e) {
+							document.removeEventListener('mousedown',down)
 							document.removeEventListener('mousemove',move)
 							document.removeEventListener('mouseup', up)
 						}
@@ -69,6 +71,7 @@
 							vnode.context.$parent.height = height - _y
 						}
 						var up = function(e) {
+							document.removeEventListener('mousedown',down)
 							document.removeEventListener('mousemove',move)
 							document.removeEventListener('mouseup', up)
 						}
@@ -88,6 +91,7 @@
 							vnode.context.$parent.height = height + _y
 						}
 						var up = function(e) {
+							document.removeEventListener('mousedown',down)
 							document.removeEventListener('mousemove',move)
 							document.removeEventListener('mouseup', up)
 						}

@@ -40,7 +40,7 @@
 		align-content: flex-start;
 
 		.appitem {
-			background: rgba(0, 0, 0, .5);
+			background: rgba(0, 0, 0, .4);
 			border-radius: 20px;
 			color: #fff;
 			width: 100px;
@@ -48,7 +48,6 @@
 			text-align: center;
 			line-height: 100px;
 			margin: 10px;
-			user-select: none;
 		}
 	}
 </style>
