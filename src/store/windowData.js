@@ -6,7 +6,7 @@ export default {
 		beginTop: 30,
 		beginLeft: 30,
 		zIndex: 1,
-		openApp:{},
+		openApp:[],
 		activeApp: 0
     },
     mutations:{
@@ -25,11 +25,15 @@ export default {
 			console.log('index:'+state.zIndex)
 		},
 		setOpenApp(state,val){
-			state.openApp[val.appid] = val
+			state.openApp.push(val)
 		},
 		deleteOpenApp(state,appid){
-			delete state.openApp[appid]
-			if(Object.keys(state.openApp)==0){
+			for(var i=0;i<state.openApp.length;i++){
+				if(state.openApp[i].appid == appid){
+					state.openApp.splice(i,1)
+				}
+			}
+			if(state.openApp.length==0){
 				state.zIndex = 1;
 			}
 		},
