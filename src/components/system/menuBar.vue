@@ -25,7 +25,15 @@
 		},
 		methods:{
 			activeapp(item) {
-				this.$store.commit("windowData/setActiveApp", item.appid)
+				var active = this.$store.state.windowData.activeApp
+				if(item.visible == false){ // 已经隐藏，先显示，并跳到最前面
+					this.$store.commit("windowData/setVisible", item.appid)
+					this.$store.commit("windowData/setActiveApp", item.appid)
+				}else if(active!=item.appid){ // 不在最前面，跳到最前面
+					this.$store.commit("windowData/setActiveApp", item.appid)
+				}else{
+					this.$store.commit("windowData/setVisible", item.appid)
+				}
 			},
 		},
 		created(){

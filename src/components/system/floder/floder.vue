@@ -2,7 +2,7 @@
 	<transition name="slidefade">
 		<div @mousedown="activeapp" :ref="'ref_'+appid" v-if="visible" class="floder" :class="activeApp?'floder-active':''" :style="{width:width+'px',height:height+'px','top':top+'px','left':left+'px','zIndex':zIndex}">
 			<changesize></changesize>
-			<daohang :drag="true" @closeapp="close" :app_name="app_name"></daohang>
+			<daohang :drag="true" @closeapp="close" :appname="app_name" :appid="appid"></daohang>
 		</div>
 	</transition>
 </template>
@@ -30,8 +30,8 @@
 		watch:{
 			activeApp: function(bool){
 				if(bool){
-					this.zIndex = store.state.windowData.zIndex;
 					store.commit("windowData/setzIndex")
+					this.zIndex = store.state.windowData.zIndex;
 				}
 			}
 		},

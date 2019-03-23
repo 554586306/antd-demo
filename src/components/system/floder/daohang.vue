@@ -1,7 +1,7 @@
 <template>
 	<div class="daohang" v-drag="{canIdrag:drag}">
 		<div class="con">
-			<div>{{app_name}}</div>
+			<div>{{appname}}</div>
 			<div class="control">
 				<span @click="minapp">小</span>
 				<span @click="maxapp">大</span>
@@ -16,7 +16,8 @@
 	import store from '../../../store/store.js'
 	export default {
 		props: {
-			app_name: String,
+			appname: String,
+			appid: Number,
 			drag: {
 				type: Boolean,
 				default: true
@@ -94,7 +95,7 @@
 				}
 			},
 			minapp(){
-				console.log('xiao')
+				store.commit("windowData/setVisible", this.appid)
 			}
 		},
 		created() {

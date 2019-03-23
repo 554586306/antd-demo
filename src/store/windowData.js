@@ -1,44 +1,68 @@
 export default {
 	namespaced: true,
-    state:{
-        data:"",
-		id:1,
+	state: {
+		data: "",
+		id: 1,
 		beginTop: 30,
 		beginLeft: 30,
 		zIndex: 1,
-		openApp:[],
+		openApp: [],
 		activeApp: 0
-    },
-    mutations:{
-        setdata(state,val){
-            state.data = val;
-        },
-		setId(state,val){
-		    state.id += 1;
+	},
+	mutations: {
+		setdata(state, val) {
+			state.data = val;
 		},
-		setPosition(state,val){
-		    state.beginTop += 5;
-		    state.beginLeft += 5;
+		setId(state, val) {
+			state.id ++;
 		},
-		setzIndex(state,val){
-		    state.zIndex += 1;
-			console.log('index:'+state.zIndex)
+		setPosition(state, val) {
+			state.beginTop += 5;
+			state.beginLeft += 5;
 		},
-		setOpenApp(state,val){
+		setzIndex(state, val) {
+			state.zIndex ++;
+			console.log('index:' + state.zIndex)
+		},
+		setOpenApp(state, val) {
 			state.openApp.push(val)
 		},
-		deleteOpenApp(state,appid){
-			for(var i=0;i<state.openApp.length;i++){
-				if(state.openApp[i].appid == appid){
-					state.openApp.splice(i,1)
+		deleteOpenApp(state, appid) {
+			for (var i = 0; i < state.openApp.length; i++) {
+				if (state.openApp[i].appid == appid) {
+					state.openApp.splice(i, 1)
 				}
 			}
-			if(state.openApp.length==0){
+			if (state.openApp.length == 0) {
 				state.zIndex = 1;
 			}
 		},
-		setActiveApp(state,val){
-			state.activeApp = val
+		setActiveApp(state, appid) {
+			state.activeApp = appid
+		},
+		setVisible(state, appid) {
+			var visible = null
+			for (var i = 0; i < state.openApp.length; i++) {
+				if (state.openApp[i].appid == appid) {
+					state.openApp[i].visible = !state.openApp[i].visible // 显示/隐藏
+					visible = state.openApp[i].visible
+					break;
+				}
+			}
+			if (!visible) { // 最小化隐藏，就改变activeApp的num
+				var zIndex = -1;
+				var showAppid = -1;
+				for (var i = 0; i < state.openApp.length; i++) {
+					if (state.openApp[i].visible == true) {
+						if(state.openApp[i].zIndex>zIndex){
+							showAppid = state.openApp[i].appid
+						}
+					}
+				}
+				if(showAppid!=-1){
+					this.commit('windowData/setActiveApp', showAppid)
+				}
+			}
 		}
-    },
+	},
 }
