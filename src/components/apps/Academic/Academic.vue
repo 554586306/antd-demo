@@ -1,5 +1,8 @@
 <template>
-	<div>Academic{{a}}</div>
+	<div>
+		Academic{{a}}
+		<input type="text">
+	</div>
 </template>
 
 <script>
