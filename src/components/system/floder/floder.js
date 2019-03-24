@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.js'
+import Vue from 'vue'
 import store from '../../../store/store.js'
 const floderConstructor = Vue.extend(require('./floder.vue').default) // 直接将Vue组件作为Vue.extend的参数
 const floder = (options) => {

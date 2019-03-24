@@ -34,7 +34,7 @@
 			activeApp: function(bool) {
 				if (bool) {
 					this.zIndex = store.state.windowData.zIndex;
-					store.commit("windowData/setzIndex")
+					store.commit("windowData/setzIndex");
 				}
 			}
 		},
@@ -48,7 +48,7 @@
 				store.commit("windowData/setActiveApp", this.appid)
 			},
 			close() {
-				this.visible = false
+				this.visible = false;
 				setTimeout(() => {
 					store.commit("windowData/deleteOpenApp", this.appid)
 					this.$destroy(true)
