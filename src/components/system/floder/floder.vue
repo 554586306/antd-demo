@@ -4,7 +4,7 @@
 		 :style="{width:width+'px',height:height+'px','top':top+'px','left':left+'px','zIndex':zIndex}">
 			<changesize></changesize>
 			<daohang :drag="true" @closeapp="close" :appname="app_name" :appid="appid"></daohang>
-			<component :is="app.type" :item.sync="app"></component>
+			<component :is="app_folder"></component>
 		</div>
 	</transition>
 </template>
@@ -13,8 +13,8 @@
 	import daohang from './daohang.vue'
 	import changesize from './changesize.vue'
 	import store from '../../../store/store.js'
-
-	export default {
+	
+	var obj = {
 		data() {
 			return {
 				visible: false,
@@ -66,17 +66,17 @@
 			store.commit("windowData/setzIndex")
 		},
 		mounted() {
-			console.log(this)
 		}
 	}
+	export default obj
+	
 	var appRequire = require.context('../../apps/', true, /\.vue$/);
 	var appPathArr = appRequire.keys();
 	appPathArr.forEach(function(appPath) {
 		var appName = appPath.replace(/\.vue$/, "");
 		appName = appName.replace(/^\.\//, '');
 		appName = appName.replace(/(.*)\//, '');
-		console.log(appRequire(appPath))
-		//module.exports.components[appName] = appRequire(appPath);
+		obj.components[appName] = appRequire(appPath).default;
 	});
 </script>
 
