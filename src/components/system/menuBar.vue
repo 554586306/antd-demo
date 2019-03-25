@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	import {initData} from '../../static/js/demo-data.js'
+	import {initData} from '../../static/js/demo-data.js';
 	export default {
 		data() {
 			return {
@@ -61,6 +61,7 @@
 			heihgt: 100%;
 			.item{
 				width: 50px;
+				padding: 0 5px;
 				height: 100%;
 				background: rgba(255, 255, 255, .5);
 				margin-right: 5px;

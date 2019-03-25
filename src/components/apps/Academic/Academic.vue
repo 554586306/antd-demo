@@ -33,6 +33,7 @@
 				//打开已有窗口
 				var desktopApp = this.$store.state.windowData.data.data.apps
 				for(var i in desktopApp){
+					console.log(desktopApp[i])
 					if(desktopApp[i].app_folder == "ClassTeacher"){
 						this.$floder(desktopApp[i])
 						break;

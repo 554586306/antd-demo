@@ -1,7 +1,7 @@
 export default {
 	namespaced: true,
 	state: {
-		data: "",
+		data: {},
 		id: 1,
 		beginTop: 30,
 		beginLeft: 30,
@@ -12,6 +12,9 @@ export default {
 	},
 	mutations: {
 		setdata(state, val) {
+			for(var i in val.data.apps){
+//				val.data.apps[i].appidMd5 = 
+			}
 			state.data = val;
 		},
 		setId(state, val) {
