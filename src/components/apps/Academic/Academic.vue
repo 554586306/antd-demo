@@ -9,9 +9,12 @@
 
 <script>
 	export default {
+		props: {
+			item: Number
+		},
 		data() {
 			return {
-				a: 1
+				a: 'EEE'
 			}
 		},
 		computed:{
@@ -42,7 +45,7 @@
 			}
 		},
 		created(){
-			
+			console.log(this.item)
 		}
 	}
 </script>

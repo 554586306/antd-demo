@@ -13,7 +13,8 @@ export default {
 	mutations: {
 		setdata(state, val) {
 			for(var i in val.data.apps){
-//				val.data.apps[i].appidMd5 = 
+				var num = Math.round(Math.random()*10000000000000000)
+				val.data.apps[i].appidMd5 = num
 			}
 			state.data = val;
 		},

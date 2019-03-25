@@ -29,8 +29,8 @@ const floder = (options,extra) => {
 	store.commit("windowData/setPosition")
 	floderInstance.zIndex = store.state.windowData.zIndex;
 	store.commit("windowData/setzIndex")
-	for(var i in extra){
-		floderInstance[i] = extra[i]
+	for(var j in extra){
+		floderInstance[j] = extra[j]
 	}
 	
 	floderInstance.vm = floderInstance.$mount(); // 挂载但是并未插入dom，是一个完整的Vue实例
