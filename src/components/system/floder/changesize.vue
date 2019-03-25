@@ -24,12 +24,12 @@
 					var down = function(e) {
 						var width = vnode.context.$parent.width
 						var x = e.clientX - el.parentNode.offsetLeft
-						var move = function(e) {
-							var _x = e.clientX - x;
-							vnode.context.$parent.left = e.clientX
+						var move = function(ee) {
+							var _x = ee.clientX - x;
+							vnode.context.$parent.left = ee.clientX
 							vnode.context.$parent.width = width - _x
 						}
-						var up = function(e) {
+						var up = function() {
 							document.removeEventListener('mousedown',down)
 							document.removeEventListener('mousemove',move)
 							document.removeEventListener('mouseup', up)
@@ -45,11 +45,11 @@
 					var down = function(e) {
 						var width = vnode.context.$parent.width
 						var x = e.clientX
-						var move = function(e) {
-							var _x = e.clientX - x;
+						var move = function(ee) {
+							var _x = ee.clientX - x;
 							vnode.context.$parent.width = width + _x
 						}
-						var up = function(e) {
+						var up = function() {
 							document.removeEventListener('mousedown',down)
 							document.removeEventListener('mousemove',move)
 							document.removeEventListener('mouseup', up)
@@ -65,12 +65,12 @@
 					var down = function(e) {
 						var height = vnode.context.$parent.height
 						var y = e.clientY - el.parentNode.offsetTop
-						var move = function(e) {
-							var _y = e.clientY - y;
-							vnode.context.$parent.top = e.clientY
+						var move = function(ee) {
+							var _y = ee.clientY - y;
+							vnode.context.$parent.top = ee.clientY
 							vnode.context.$parent.height = height - _y
 						}
-						var up = function(e) {
+						var up = function() {
 							document.removeEventListener('mousedown',down)
 							document.removeEventListener('mousemove',move)
 							document.removeEventListener('mouseup', up)
@@ -86,11 +86,11 @@
 					var down = function(e) {
 						var height = vnode.context.$parent.height
 						var y = e.clientY
-						var move = function(e) {
-							var _y = e.clientY - y;
+						var move = function(ee) {
+							var _y = ee.clientY - y;
 							vnode.context.$parent.height = height + _y
 						}
-						var up = function(e) {
+						var up = function() {
 							document.removeEventListener('mousedown',down)
 							document.removeEventListener('mousemove',move)
 							document.removeEventListener('mouseup', up)

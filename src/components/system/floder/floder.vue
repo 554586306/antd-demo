@@ -4,7 +4,7 @@
 		 :style="{width:width+'px',height:height+'px','top':top+'px','left':left+'px','zIndex':zIndex}">
 			<changesize></changesize>
 			<daohang :drag="true" @closeapp="close" :appname="app_name" :appid="appid"></daohang>
-			<component :is="app_folder"></component>
+			<component :is="app_folder" class="boxcon"></component>
 		</div>
 	</transition>
 </template>
@@ -96,6 +96,14 @@
 		background: #fff;
 		position: absolute;
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, .1);
+		display: flex;
+		flex-direction: column;
+		.boxcon{
+			flex: 1;
+			border-bottom-left-radius: 5px;
+			border-bottom-right-radius: 5px;
+			overflow: hidden;
+		}
 	}
 
 	.floder-active {

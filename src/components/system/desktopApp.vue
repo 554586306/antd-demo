@@ -18,10 +18,10 @@
 		methods:{
 			openapp(item){
 				if(item.app_name == '资产管理'){
-					item.width = 900;
-					item.height = 600;
+					this.$floder(item,{width:900,height:700})
+				}else{
+					this.$floder(item)
 				}
-				this.$floder(item)
 			}
 		},
 		created() {

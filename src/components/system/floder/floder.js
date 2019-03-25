@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import store from '../../../store/store.js'
 const floderConstructor = Vue.extend(require('./floder.vue').default) // 直接将Vue组件作为Vue.extend的参数
-const floder = (options) => {
+
+const floder = (options,extra) => {
 	if(!options.appid){  // 如果新文件夹没有appid
 		options.appid = store.state.windowData.id
 		store.commit("windowData/setId")
@@ -20,6 +21,11 @@ const floder = (options) => {
 		data: options //在这里将你传过来的参数匹配到floder.vue组件的data
 	})
 	floderInstance.appid = options.appid
+	
+	for(var i in extra){
+		floderInstance[i] = extra[i]
+	}
+	
 	floderInstance.vm = floderInstance.$mount(); // 挂载但是并未插入dom，是一个完整的Vue实例
 	floderInstance.vm.visible = true //这里修改message.vue数据中的visible,这样message组件就显示出来
 	

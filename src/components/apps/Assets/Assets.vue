@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div>3214</div>
+		<div><iframe src="http://baidu.com" width="100%" height="600"></iframe></div>
 		Assets
 	</div>
 </template>
