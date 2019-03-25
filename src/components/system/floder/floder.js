@@ -20,8 +20,15 @@ const floder = (options,extra) => {
 		store,
 		data: options //在这里将你传过来的参数匹配到floder.vue组件的data
 	})
+	
+	// 设置参数
 	floderInstance.appid = options.appid
 	
+	floderInstance.top = store.state.windowData.beginTop;
+	floderInstance.left = store.state.windowData.beginLeft;
+	store.commit("windowData/setPosition")
+	floderInstance.zIndex = store.state.windowData.zIndex;
+	store.commit("windowData/setzIndex")
 	for(var i in extra){
 		floderInstance[i] = extra[i]
 	}

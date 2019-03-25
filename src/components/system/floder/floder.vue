@@ -55,13 +55,7 @@
 			}
 		},
 		created() {
-			this.width = window.innerWidth < this.width? window.innerWidth: this.width;
-			this.height = window.innerHeight < this.height? window.innerHeight: this.height;
-			this.top = window.innerHeight == this.height ? 0 : this.$store.state.windowData.beginTop; //这里修改message.vue数据中的visible,这样message组件就显示出来
-			this.left = window.innerWidth == this.width ? 0 : this.$store.state.windowData.beginLeft; //这里修改message.vue数据中的visible,这样message组件就显示出来
-			this.$store.commit("windowData/setPosition")
-			this.zIndex = this.$store.state.windowData.zIndex;
-			this.$store.commit("windowData/setzIndex")
+			
 		},
 		mounted() {
 		}

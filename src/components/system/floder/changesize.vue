@@ -26,6 +26,9 @@
 						var x = e.clientX - el.parentNode.offsetLeft
 						var move = function(ee) {
 							var _x = ee.clientX - x;
+							if(width - _x < 170){
+								return;
+							}
 							vnode.context.$parent.left = ee.clientX
 							vnode.context.$parent.width = width - _x
 						}
@@ -47,6 +50,9 @@
 						var x = e.clientX
 						var move = function(ee) {
 							var _x = ee.clientX - x;
+							if(width + _x < 170){
+								return;
+							}
 							vnode.context.$parent.width = width + _x
 						}
 						var up = function() {
@@ -67,6 +73,9 @@
 						var y = e.clientY - el.parentNode.offsetTop
 						var move = function(ee) {
 							var _y = ee.clientY - y;
+							if( height - _y < 60){
+								return;
+							}
 							vnode.context.$parent.top = ee.clientY
 							vnode.context.$parent.height = height - _y
 						}
@@ -88,6 +97,9 @@
 						var y = e.clientY
 						var move = function(ee) {
 							var _y = ee.clientY - y;
+							if( height + _y < 60){
+								return;
+							}
 							vnode.context.$parent.height = height + _y
 						}
 						var up = function() {
