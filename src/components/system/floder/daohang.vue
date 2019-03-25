@@ -13,7 +13,6 @@
 
 <script>
 	import {initData} from '../../../static/js/demo-data.js'
-	import store from '../../../store/store.js'
 	export default {
 		props: {
 			appname: String,
@@ -95,7 +94,7 @@
 				}
 			},
 			minapp(){
-				store.commit("windowData/setVisible", this.appid)
+				this.$store.commit("windowData/setVisible", this.appid)
 			}
 		},
 		created() {

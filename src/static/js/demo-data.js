@@ -289,12 +289,9 @@ var data = {
 	}
 }
 
-console.log(this)
-
 var init = {
 	height: 50
 }
-
 
 module.exports = {
 	windowData: data,

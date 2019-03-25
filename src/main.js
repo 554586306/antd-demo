@@ -5,7 +5,7 @@ import "ant-design-vue/dist/antd.css";
 import "./static/css/common.css";
 Vue.use(Antd);
 import store from  './store/store'
-import floder from  './components/system/floder/floder'
+import floder from  './components/system/floder/floder.js'
 Vue.prototype.$floder = floder
 
 Vue.config.productionTip = false

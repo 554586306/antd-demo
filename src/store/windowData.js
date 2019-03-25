@@ -41,6 +41,14 @@ export default {
 		setActiveApp(state, appid) {
 			state.activeApp = appid
 		},
+		setVisibleAlways(state, appid) {  // 总是显示
+			for (var i = 0; i < state.openApp.length; i++) {
+				if (state.openApp[i].appid == appid) {
+					state.openApp[i].visible = true // 显示/隐藏
+					break;
+				}
+			}
+		},
 		setVisible(state, appid) {
 			var visible = null
 			for (var i = 0; i < state.openApp.length; i++) {

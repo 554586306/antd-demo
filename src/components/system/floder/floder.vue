@@ -1,6 +1,6 @@
 <template>
 	<transition name="slidefade">
-		<div @mousedown="activeapp" :ref="'ref_'+appid" v-if="visible" class="floder" :class="activeApp?'floder-active':''"
+		<div @mousedown="activeapp" :ref="'ref_'+appid" v-show="visible" class="floder" :class="activeApp?'floder-active':''"
 		 :style="{width:width+'px',height:height+'px','top':top+'px','left':left+'px','zIndex':zIndex}">
 			<changesize></changesize>
 			<daohang :drag="true" @closeapp="close" :appname="app_name" :appid="appid"></daohang>
@@ -12,8 +12,6 @@
 <script>
 	import daohang from './daohang.vue'
 	import changesize from './changesize.vue'
-	import store from '../../../store/store.js'
-	
 	var obj = {
 		data() {
 			return {
@@ -33,38 +31,37 @@
 		watch: {
 			activeApp: function(bool) {
 				if (bool) {
-					this.zIndex = store.state.windowData.zIndex;
-					store.commit("windowData/setzIndex");
+					this.zIndex = this.$store.state.windowData.zIndex;
+					this.$store.commit("windowData/setzIndex");
 				}
 			}
 		},
 		computed: {
 			activeApp: function() {
-				return store.state.windowData.activeApp == this.appid;
+				return this.$store.state.windowData.activeApp == this.appid;
 			}
 		},
 		methods: {
 			activeapp() {
-				store.commit("windowData/setActiveApp", this.appid)
+				this.$store.commit("windowData/setActiveApp", this.appid)
 			},
 			close() {
 				this.visible = false;
 				setTimeout(() => {
-					store.commit("windowData/deleteOpenApp", this.appid)
+					this.$store.commit("windowData/deleteOpenApp", this.appid)
 					this.$destroy(true)
 					this.$el.parentNode.removeChild(this.$el) // 从DOM里将这个组件移除
 				}, 500)
 			}
 		},
 		created() {
-			
-			this.width = window.innerWidth < 500? window.innerWidth: 500;
-			this.height = window.innerHeight < 400? window.innerHeight: 400;
-			this.top = window.innerHeight == this.height ? 0 : store.state.windowData.beginTop; //这里修改message.vue数据中的visible,这样message组件就显示出来
-			this.left = window.innerWidth == this.width ? 0 : store.state.windowData.beginLeft; //这里修改message.vue数据中的visible,这样message组件就显示出来
-			store.commit("windowData/setPosition")
-			this.zIndex = store.state.windowData.zIndex;
-			store.commit("windowData/setzIndex")
+			this.width = window.innerWidth < this.width? window.innerWidth: this.width;
+			this.height = window.innerHeight < this.height? window.innerHeight: this.height;
+			this.top = window.innerHeight == this.height ? 0 : this.$store.state.windowData.beginTop; //这里修改message.vue数据中的visible,这样message组件就显示出来
+			this.left = window.innerWidth == this.width ? 0 : this.$store.state.windowData.beginLeft; //这里修改message.vue数据中的visible,这样message组件就显示出来
+			this.$store.commit("windowData/setPosition")
+			this.zIndex = this.$store.state.windowData.zIndex;
+			this.$store.commit("windowData/setzIndex")
 		},
 		mounted() {
 		}

@@ -1,5 +1,8 @@
 <template>
-	<div>Assets</div>
+	<div>
+		<div>321</div>
+		Assets
+	</div>
 </template>
 
 <script>

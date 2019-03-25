@@ -6,7 +6,9 @@ const floder = (options) => {
 		options.appid = store.state.windowData.id
 		store.commit("windowData/setId")
 	}
-	store.commit("windowData/setActiveApp",options.appid)
+	store.commit("windowData/setVisibleAlways", options.appid)  // 显示
+	store.commit("windowData/setActiveApp",options.appid) // 跳到最前面
+	
 	var obj = store.state.windowData.openApp
 	for(var i=0;i<obj.length;i++) {
 		if(obj[i].appid == options.appid) return;
@@ -14,6 +16,7 @@ const floder = (options) => {
 	store.commit("windowData/setOpenApp",options)
 	
 	const floderInstance = new floderConstructor({ // 实例化一个带有content内容的Notice
+		store,
 		data: options //在这里将你传过来的参数匹配到floder.vue组件的data
 	})
 	floderInstance.appid = options.appid
