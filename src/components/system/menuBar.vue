@@ -4,6 +4,9 @@
 		<div class="appicon">
 			<div @mousedown="activeapp(item)" v-for="item in desktopApp" class="item" :class="activeApp==item.appid?'activeApp':''">{{item.app_name}}</div>
 		</div>
+		<div class="appicon" style="position: absolute;right: 0;height: 100%;">
+			<div class="item" @click="showDrawer">抽屉</div>
+		</div>
 	</div>
 </template>
 
@@ -24,6 +27,9 @@
 			}
 		},
 		methods:{
+			showDrawer(){
+				this.$store.commit("windowData/setShowDrawer")
+			},
 			activeapp(item) {
 				var active = this.$store.state.windowData.activeApp
 				if(item.visible == false){ // 已经隐藏，先显示，并跳到最前面

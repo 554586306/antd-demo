@@ -1,5 +1,5 @@
 <template>
-	<div>Invigilate</div>
+	<div>RegularSchedul</div>
 </template>
 
 <script>

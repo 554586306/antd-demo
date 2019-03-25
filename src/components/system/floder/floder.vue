@@ -4,7 +4,7 @@
 		 :style="{width:width+'px',height:height+'px','top':top+'px','left':left+'px','zIndex':zIndex}">
 			<changesize></changesize>
 			<daohang :drag="true" @closeapp="close" :appname="app_name" :appid="appid"></daohang>
-			<component :is="app_folder" style="user-select: text;"></component>
+			<component :is="app_folder"></component>
 		</div>
 	</transition>
 </template>
@@ -57,10 +57,11 @@
 			}
 		},
 		created() {
-			this.width = 500;
-			this.height = 400;
-			this.top = store.state.windowData.beginTop; //这里修改message.vue数据中的visible,这样message组件就显示出来
-			this.left = store.state.windowData.beginLeft; //这里修改message.vue数据中的visible,这样message组件就显示出来
+			
+			this.width = window.innerWidth < 500? window.innerWidth: 500;
+			this.height = window.innerHeight < 400? window.innerHeight: 400;
+			this.top = window.innerHeight == this.height ? 0 : store.state.windowData.beginTop; //这里修改message.vue数据中的visible,这样message组件就显示出来
+			this.left = window.innerWidth == this.width ? 0 : store.state.windowData.beginLeft; //这里修改message.vue数据中的visible,这样message组件就显示出来
 			store.commit("windowData/setPosition")
 			this.zIndex = store.state.windowData.zIndex;
 			store.commit("windowData/setzIndex")

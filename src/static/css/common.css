@@ -1,0 +1,3 @@
+.ant-drawer-right .ant-drawer-content-wrapper {
+  height: -webkit-calc(95%) !important;
+}

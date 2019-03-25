@@ -7,7 +7,8 @@ export default {
 		beginLeft: 30,
 		zIndex: 1,
 		openApp: [],
-		activeApp: 0
+		activeApp: 0,
+		showDrawer: false
 	},
 	mutations: {
 		setdata(state, val) {
@@ -64,6 +65,9 @@ export default {
 					this.commit('windowData/setActiveApp', showAppid)
 				}
 			}
-		}
+		},
+		setShowDrawer(state, val) {
+			state.showDrawer = !state.showDrawer
+		},
 	},
 }

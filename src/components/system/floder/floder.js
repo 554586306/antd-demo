@@ -2,6 +2,10 @@ import Vue from 'vue'
 import store from '../../../store/store.js'
 const floderConstructor = Vue.extend(require('./floder.vue').default) // 直接将Vue组件作为Vue.extend的参数
 const floder = (options) => {
+	if(!options.appid){  // 如果新文件夹没有appid
+		options.appid = store.state.windowData.id
+		store.commit("windowData/setId")
+	}
 	store.commit("windowData/setActiveApp",options.appid)
 	var obj = store.state.windowData.openApp
 	for(var i=0;i<obj.length;i++) {

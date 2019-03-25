@@ -1,5 +1,5 @@
 <template>
-	<div>Examination</div>
+	<div>ExamineGrade</div>
 </template>
 
 <script>
