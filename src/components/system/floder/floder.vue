@@ -47,8 +47,8 @@
 			},
 			close() {
 				this.visible = false;
+				this.$store.commit("windowData/deleteOpenApp", this.appid)
 				setTimeout(() => {
-					this.$store.commit("windowData/deleteOpenApp", this.appid)
 					this.$destroy(true)
 					this.$el.parentNode.removeChild(this.$el) // 从DOM里将这个组件移除
 				}, 500)
