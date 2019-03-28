@@ -7,6 +7,7 @@ const floder = (options,extra) => {
 // 		options.appidMd5 = Math.round(Math.random()*10000000000000000)
 // 	}
 	if(!options.appid){  // 如果新文件夹没有appid
+		store.commit("windowData/setIsCreate",true)
 		options.appid = store.state.windowData.id
 		store.commit("windowData/setId")
 	}
@@ -33,6 +34,7 @@ const floder = (options,extra) => {
 	floderInstance.top = store.state.windowData.beginTop;
 	floderInstance.left = store.state.windowData.beginLeft;
 	store.commit("windowData/setzIndex")
+	console.log(store.state.windowData.zIndex,111)
 	floderInstance.zIndex = store.state.windowData.zIndex;
 	for(var j in extra){
 		floderInstance[j] = extra[j]

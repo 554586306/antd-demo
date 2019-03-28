@@ -8,7 +8,8 @@ export default {
 		zIndex: 0,
 		openApp: [],
 		activeApp: 0,
-		showDrawer: false
+		showDrawer: false,
+		isCreate: false
 	},
 	mutations: {
 		setdata(state, val) {
@@ -31,15 +32,31 @@ export default {
 		deleteOpenApp(state, appid) {
 			for (var i = 0; i < state.openApp.length; i++) {
 				if (state.openApp[i].appid == appid) {
+					state.zIndex --;
 					state.openApp.splice(i, 1)
 				}
 			}
-			if (state.openApp.length == 0) {
-				state.zIndex = 0;
-			}
+// 			if (state.openApp.length == 0) {
+// 				state.zIndex = 0;
+// 			}
 		},
 		setActiveApp(state, appid) {
+			if(state.isCreate == false && state.activeApp!=appid){
+				var z;
+				for (var i = 0; i < state.openApp.length; i++) {
+					if (state.openApp[i].appid == appid) {
+						z = state.openApp[i]
+					}
+				}
+				for (var i = 0; i < state.openApp.length; i++) {
+					if (state.openApp[i].zIndex > z.zIndex) {
+						state.openApp[i].zIndex --
+					}
+				}
+				z.zIndex = state.zIndex
+			}
 			state.activeApp = appid
+			this.commit("windowData/setIsCreate",false)
 		},
 		setVisibleAlways(state, appid) {  // 总是显示
 			for (var i = 0; i < state.openApp.length; i++) {
@@ -76,6 +93,9 @@ export default {
 		},
 		setShowDrawer(state, val) {
 			state.showDrawer = !state.showDrawer
+		},
+		setIsCreate(state, val) {
+			state.isCreate = val
 		},
 	},
 }

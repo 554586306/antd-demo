@@ -29,12 +29,12 @@
 			changesize,
 		},
 		watch: {
-			activeApp: function(bool) {
-				if (bool) {
-					this.$store.commit("windowData/setzIndex");
-					this.zIndex = this.$store.state.windowData.zIndex;
-				}
-			}
+// 			activeApp: function(bool) {
+// 				if (bool) {
+// 					this.$store.commit("windowData/setzIndex");
+// 					this.zIndex = this.$store.state.windowData.zIndex;
+// 				}
+// 			}
 		},
 		computed: {
 			activeApp: function() {
