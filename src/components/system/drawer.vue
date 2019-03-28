@@ -4,7 +4,7 @@
 			<p>Some contents...</p>
 			<p>Some contents...</p>
 			<p>Some contents...</p>
-			<button @click="openPaike">打开评分</button>
+			<button @click="openPaike('ClassTeacher')">打开评分</button>
 		</a-drawer>
 	</div>
 </template>
@@ -23,11 +23,11 @@
 			onClose() {
 				this.$store.commit("windowData/setShowDrawer")
 			},
-			openPaike(){
+			openPaike(component){
 				//打开已有窗口
 				var desktopApp = this.$store.state.windowData.data.data.apps
 				for(var i in desktopApp){
-					if(desktopApp[i].app_folder == "ClassTeacher"){
+					if(desktopApp[i].app_folder == component){
 						this.$floder(desktopApp[i])
 						this.onClose()
 						break;

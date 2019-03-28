@@ -31,8 +31,8 @@
 		watch: {
 			activeApp: function(bool) {
 				if (bool) {
-					this.zIndex = this.$store.state.windowData.zIndex;
 					this.$store.commit("windowData/setzIndex");
+					this.zIndex = this.$store.state.windowData.zIndex;
 				}
 			}
 		},

@@ -11,59 +11,59 @@
 </template>
 
 <script>
-	import {initData} from '../../static/js/demo-data.js';
+	import {
+		initData
+	} from '../../static/js/demo-data.js';
 	export default {
 		data() {
 			return {
 				height: initData.height,
 			}
 		},
-		computed:{
-			desktopApp (){
-				var arr = this.$store.state.windowData.openApp.concat([])
-				arr.forEach((b,i)=>{
-					
-				})
-				return arr
+		computed: {
+			desktopApp() {
+				return this.$store.state.windowData.openApp
 			},
-			activeApp (){
+			activeApp() {
 				return this.$store.state.windowData.activeApp
 			},
 		},
-		methods:{
-			showDrawer(){
+		methods: {
+			showDrawer() {
 				this.$store.commit("windowData/setShowDrawer")
 			},
 			activeapp(item) {
 				var active = this.$store.state.windowData.activeApp
-				if(item.visible == false){ // 已经隐藏，先显示，并跳到最前面
+				if (item.visible == false) { // 已经隐藏，先显示，并跳到最前面
 					this.$store.commit("windowData/setVisible", item.appid)
 					this.$store.commit("windowData/setActiveApp", item.appid)
-				}else if(active!=item.appid){ // 不在最前面，跳到最前面
+				} else if (active != item.appid) { // 不在最前面，跳到最前面
 					this.$store.commit("windowData/setActiveApp", item.appid)
-				}else{
+				} else {
 					this.$store.commit("windowData/setVisible", item.appid)
 				}
 			},
 		},
-		created(){
-			
+		created() {
+
 		}
 	}
 </script>
 
 <style scoped lang="less">
-	.menu-bar{
+	.menu-bar {
 		position: absolute;
 		z-index: 500;
 		bottom: 0;
 		width: 100%;
 		background: rgba(255, 255, 255, .5);
 		display: flex;
-		.appicon{
+
+		.appicon {
 			display: flex;
 			heihgt: 100%;
-			.item{
+
+			.item {
 				width: 50px;
 				padding: 0 5px;
 				height: 100%;
@@ -77,7 +77,8 @@
 				border-left: 1px solid #999;
 				border-right: 1px solid #999;
 			}
-			.activeApp{
+
+			.activeApp {
 				background: #fff;
 			}
 		}

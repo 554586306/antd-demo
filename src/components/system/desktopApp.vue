@@ -1,6 +1,6 @@
 <template>
 	<div class="colum" :style="{height:height+'px'}">
-		<div v-for="(item) in desktopApp" class="appitem" @dblclick="openapp(item)">
+		<div v-for="(item) in desktopApp" class="appitem" @dblclick="openapp(item)" v-if="!item.children">
 			<span>{{item.app_name}}</span>
 		</div>
 	</div>
@@ -11,9 +11,13 @@
 	export default {
 		data() {
 			return {
-				desktopApp: {},
 				height: 0
 			}
+		},
+		computed:{
+			desktopApp (){
+				return this.$store.state.windowData.data.data.apps
+			},
 		},
 		methods:{
 			openapp(item){
@@ -30,7 +34,6 @@
 			window.onresize = function() {
 				that.height = document.body.clientHeight - initData.height
 			}
-			this.desktopApp = this.$store.state.windowData.data.data.apps
 		}
 	}
 </script>

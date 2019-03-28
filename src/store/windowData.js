@@ -5,29 +5,25 @@ export default {
 		id: 1,
 		beginTop: 30,
 		beginLeft: 30,
-		zIndex: 1,
+		zIndex: 0,
 		openApp: [],
 		activeApp: 0,
 		showDrawer: false
 	},
 	mutations: {
 		setdata(state, val) {
-			for(var i in val.data.apps){
-				var num = Math.round(Math.random()*10000000000000000)
-				val.data.apps[i].appidMd5 = num
-			}
 			state.data = val;
 		},
 		setId(state, val) {
 			state.id ++;
 		},
 		setPosition(state, val) {
-			state.beginTop += 5;
-			state.beginLeft += 5;
+			state.beginTop += 10;
+			state.beginLeft += 10;
 		},
 		setzIndex(state, val) {
 			state.zIndex ++;
-			console.log('index:' + state.zIndex)
+			console.log('index:'+ state.zIndex)
 		},
 		setOpenApp(state, val) {
 			state.openApp.push(val)
@@ -39,7 +35,7 @@ export default {
 				}
 			}
 			if (state.openApp.length == 0) {
-				state.zIndex = 1;
+				state.zIndex = 0;
 			}
 		},
 		setActiveApp(state, appid) {
