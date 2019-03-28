@@ -9,9 +9,6 @@
 
 <script>
 	export default {
-		props: {
-			item: Number
-		},
 		data() {
 			return {
 				a: 'EEE'
@@ -22,13 +19,14 @@
 		},
 		methods:{
 			openFloder(){
-				//打开新窗口
+				//打开新（子）窗口
 				this.$store.commit("windowData/setId")
 				var item = {
 					app_folder: "Academic",
 					app_icon: "#icon-kaoshi",
 					app_name: "学届管理",
 					app_url: "/module/Examination-Init-Index",
+					appidMd5: this.$parent.appidMd5
 				}
 				this.$floder(item)
 			},
@@ -45,7 +43,7 @@
 			}
 		},
 		created(){
-			console.log(this.item)
+//			console.log(this)
 		}
 	}
 </script>

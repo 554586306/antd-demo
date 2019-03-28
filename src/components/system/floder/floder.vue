@@ -4,7 +4,7 @@
 		 :style="{width:width+'px',height:height+'px','top':top+'px','left':left+'px','zIndex':zIndex}">
 			<changesize></changesize>
 			<daohang :drag="true" @closeapp="close" :appname="app_name" :appid="appid"></daohang>
-			<component :is="app_folder" :item="appidMd5" class="boxcon"></component>
+			<component :is="app_folder" class="boxcon"></component>
 		</div>
 	</transition>
 </template>

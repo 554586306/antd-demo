@@ -4,7 +4,6 @@ import windowData from './windowData'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-
     modules:{
         windowData: windowData,
     }

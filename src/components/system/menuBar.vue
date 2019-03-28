@@ -2,7 +2,7 @@
 	<div class="menu-bar" :style="{height:height+'px'}">
 		<div style="width: 50px;"></div>
 		<div class="appicon">
-			<div @mousedown="activeapp(item)" v-for="item in desktopApp" class="item" :class="activeApp==item.appid?'activeApp':''">{{item.app_name}}</div>
+			<div @mousedown="activeapp(item)" v-for="(item,index) in desktopApp" class="item" :class="activeApp==item.appid?'activeApp':''">{{item.app_name}}</div>
 		</div>
 		<div class="appicon" style="position: absolute;right: 0;height: 100%;">
 			<div class="item" @click="showDrawer">抽屉</div>
@@ -20,11 +20,15 @@
 		},
 		computed:{
 			desktopApp (){
-				return this.$store.state.windowData.openApp
+				var arr = this.$store.state.windowData.openApp.concat([])
+				arr.forEach((b,i)=>{
+					
+				})
+				return arr
 			},
 			activeApp (){
 				return this.$store.state.windowData.activeApp
-			}
+			},
 		},
 		methods:{
 			showDrawer(){
@@ -65,6 +69,7 @@
 				height: 100%;
 				background: rgba(255, 255, 255, .5);
 				margin-right: 5px;
+				position: relative;
 				display: flex;
 				justify-content: center;
 				align-items: center;
