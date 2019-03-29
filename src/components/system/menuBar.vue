@@ -56,7 +56,7 @@
 		z-index: 500;
 		bottom: 0;
 		width: 100%;
-		background: rgba(255, 255, 255, .5);
+		background: rgba(255, 255, 255, .1);
 		display: flex;
 
 		.appicon {

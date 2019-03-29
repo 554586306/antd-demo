@@ -4,7 +4,7 @@
 		 :style="{width:width+'px',height:height+'px','top':top+'px','left':left+'px','zIndex':zIndex}">
 			<changesize></changesize>
 			<daohang :drag="true" @closeapp="close" :appname="app_name" :appid="appid"></daohang>
-			<component :is="app_folder" class="boxcon"></component>
+			<component :is="app_folder" class="boxcon ismargin"></component>
 		</div>
 	</transition>
 </template>
@@ -22,6 +22,7 @@
 				top: 0,
 				left: 0,
 				zIndex: 0,
+				closeflag: false  // 防止快速多次点击
 			}
 		},
 		components: {
@@ -29,12 +30,12 @@
 			changesize,
 		},
 		watch: {
-// 			activeApp: function(bool) {
+			// activeApp: function(bool) {
 // 				if (bool) {
 // 					this.$store.commit("windowData/setzIndex");
 // 					this.zIndex = this.$store.state.windowData.zIndex;
 // 				}
-// 			}
+			// }
 		},
 		computed: {
 			activeApp: function() {
@@ -42,15 +43,22 @@
 			}
 		},
 		methods: {
+			changeMax(bool){
+				this.ismax = !this.ismax
+			},
 			activeapp() {
+				if(this.closeflag) return;
 				this.$store.commit("windowData/setActiveApp", this.appid)
 			},
 			close() {
+				if(this.closeflag) return;
+				this.closeflag = true
 				this.visible = false;
 				this.$store.commit("windowData/deleteOpenApp", this.appid)
 				setTimeout(() => {
 					this.$destroy(true)
 					this.$el.parentNode.removeChild(this.$el) // 从DOM里将这个组件移除
+					this.closeflag = false
 				}, 500)
 			}
 		},
@@ -76,26 +84,34 @@
 	.slidefade-leave-active {
 		transition: all .3s ease;
 	}
-
-	.slidefade-enter,
-	.slidefade-leave-to {
-		/* .fade-leave-active below version 2.1.8 */
-		transform: translateY(-20px);
+	
+	.slidefade-enter{
+		transform: translateY(300px) translateX(-300px) scale(0.2) scaleY(0.2);
 		opacity: 0;
 	}
-
+	.slidefade-leave-to {
+		/* .fade-leave-active below version 2.1.8 */
+		transform: translateY(300px) translateX(-300px) scale(0.2) scaleY(0.2);
+		opacity: 0;
+	}
+	
 	.floder {
 		border-radius: 5px;
-		background: #fff;
+		background: rgba(255, 255, 255, .6);
 		position: absolute;
-		box-shadow: 0px 0px 10px rgba(0, 0, 0, .1);
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
 		display: flex;
 		flex-direction: column;
 		.boxcon{
 			flex: 1;
+			background: #fff;
 			border-bottom-left-radius: 5px;
 			border-bottom-right-radius: 5px;
 			overflow: hidden;
+		}
+		.ismargin{
+			margin: 5px;
+			margin-top: 0;
 		}
 	}
 

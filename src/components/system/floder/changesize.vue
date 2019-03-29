@@ -123,7 +123,7 @@
 <style scoped lang="less">
 	@a: 5px;
 	@b: 100%;
-	@c: -5px;
+	@c: 0px;
 
 	.size {
 		position: absolute;

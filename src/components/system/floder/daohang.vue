@@ -1,7 +1,7 @@
 <template>
 	<div class="daohang" v-drag="{canIdrag:drag}">
-		<div class="con">
-			<div>{{appname}}</div>
+		<div class="con" @dblclick="maxapp">
+			<div class="iconname">{{appname}}</div>
 			<div class="control">
 				<span @click="minapp">小</span>
 				<span @click="maxapp">大</span>
@@ -105,16 +105,20 @@
 
 <style scoped lang="less">
 	.daohang {
-		height: 50px;
-		background: url(../../../static/img/eggs4.jpg);
+		height: 40px;
+		// background: rgba(0, 0, 0, .3);
+		overflow: hidden;
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
 		.con {
 			display: flex;
 			justify-content: space-between;
-			line-height: 50px;
+			line-height: 40px;
 			padding: 0 10px;
-
+			.iconname{
+				color: #000;
+				text-shadow: 0 0 5px #fff;
+			}
 			.control {
 				span {
 					margin-left: 10px;

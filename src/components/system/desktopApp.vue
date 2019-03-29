@@ -45,13 +45,16 @@
 		flex-wrap: wrap;
 		justify-content: flex-start;
 		align-content: flex-start;
-
+		
 		.appitem {
-			background: rgba(0, 0, 0, .4);
-			border-radius: 20px;
+			position: relative;
+			z-index: 1;
+			background: rgba(255, 255, 255, .1);
+			border-radius: 4px;
+			box-shadow: 0 0 5px rgba(0, 0, 0, .5);
 			color: #fff;
-			width: 100px;
-			height: 100px;
+			width: 80px;
+			height: 80px;
 			text-align: center;
 			line-height: 100px;
 			margin: 10px;

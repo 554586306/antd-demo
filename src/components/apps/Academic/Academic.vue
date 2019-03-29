@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div style="padding: 5px;">
 		<input type="text" v-model="a"><br>
 		Academic{{a}}<br>
 		<button @click="openFloder('Academic')">打开无限子页面</button><br>

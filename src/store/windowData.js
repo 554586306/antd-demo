@@ -3,13 +3,13 @@ export default {
 	state: {
 		data: {},
 		id: 1,
-		beginTop: 30,
-		beginLeft: 30,
+		beginTop: 100,
+		beginLeft: 100,
 		zIndex: 0,
 		openApp: [],
 		activeApp: 0,
 		showDrawer: false,
-		isCreate: false
+		contextMenu: {}
 	},
 	mutations: {
 		setdata(state, val) {
@@ -19,12 +19,16 @@ export default {
 			state.id ++;
 		},
 		setPosition(state, val) {
-			state.beginTop += 10;
-			state.beginLeft += 10;
+			state.beginTop += 30;
+			state.beginLeft += 20;
+			if(state.beginTop + val.height>document.body.clientHeight || state.beginLeft + val.width>document.body.clientWidth){
+				state.beginTop = 100;
+				state.beginLeft = 100;
+			}
 		},
 		setzIndex(state, val) {
 			state.zIndex ++;
-			console.log('index:'+ state.zIndex)
+			// console.log('index:'+ state.zIndex)
 		},
 		setOpenApp(state, val) {
 			state.openApp.push(val)
@@ -32,8 +36,12 @@ export default {
 		deleteOpenApp(state, appid) {
 			for (var i = 0; i < state.openApp.length; i++) {
 				if (state.openApp[i].appid == appid) {
-					state.zIndex --;
+					delete state.openApp[i].width
+					delete state.openApp[i].height
+					delete state.openApp[i].left
+					delete state.openApp[i].top
 					state.openApp.splice(i, 1)
+					state.zIndex --;
 				}
 			}
 // 			if (state.openApp.length == 0) {
@@ -41,22 +49,20 @@ export default {
 // 			}
 		},
 		setActiveApp(state, appid) {
-			if(state.isCreate == false && state.activeApp!=appid){
-				var z;
-				for (var i = 0; i < state.openApp.length; i++) {
-					if (state.openApp[i].appid == appid) {
-						z = state.openApp[i]
-					}
-				}
-				for (var i = 0; i < state.openApp.length; i++) {
-					if (state.openApp[i].zIndex > z.zIndex) {
-						state.openApp[i].zIndex --
-					}
-				}
-				z.zIndex = state.zIndex
-			}
 			state.activeApp = appid
-			this.commit("windowData/setIsCreate",false)
+			var z;
+			for (var i = 0; i < state.openApp.length; i++) {
+				if (state.openApp[i].appid == appid) {
+					z = state.openApp[i]
+				}
+			}
+			
+			for (var i = 0; i < state.openApp.length; i++) {
+				if (state.openApp[i].zIndex > z.zIndex) {
+					state.openApp[i].zIndex --
+				}
+			}
+			z.zIndex = state.zIndex
 		},
 		setVisibleAlways(state, appid) {  // 总是显示
 			for (var i = 0; i < state.openApp.length; i++) {
@@ -94,8 +100,8 @@ export default {
 		setShowDrawer(state, val) {
 			state.showDrawer = !state.showDrawer
 		},
-		setIsCreate(state, val) {
-			state.isCreate = val
+		setContextMenu(state, val) {
+			state.contextMenu = val
 		},
 	},
 }

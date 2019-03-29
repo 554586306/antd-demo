@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<a-drawer wrapClassName="first-drawer" title="Basic Drawer" placement="right" :closable="false" @close="onClose" :visible="visible">
+		<a-drawer title="Basic Drawer" placement="right" :closable="false" @close="onClose" :visible="visible">
 			<p>Some contents...</p>
 			<p>Some contents...</p>
 			<p>Some contents...</p>
