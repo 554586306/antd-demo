@@ -44,7 +44,7 @@
 				}
 			},
 			// 桌面右键点击
-			handleRightClick: function(e) {
+			handleRightClick: function(e,item) {
 				let that = this
 				let xVal = e.clientX
 				let yVal = e.clientY
@@ -65,7 +65,7 @@
 						action: {
 							type: 'callback',
 							handler: function() {
-								that.num ++
+								
 								contextMenuInfo.isShow = false
 							}
 						}
