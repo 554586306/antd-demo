@@ -2,8 +2,11 @@
 	<div class="menu-bar" :style="{height:height+'px'}">
 		<div style="width: 50px;"></div>
 		<div class="appicon">
-			<div @contextmenu.stop.prevent="handleRightClick($event,item)" @click="activeapp(item)" v-for="(item,index) in desktopApp" class="item" :class="activeApp==item.appid?'activeApp':''">{{item.app_name}}</div>
+			<div v-contextmenu:contextmenu @click="activeapp(item)" v-for="(item,index) in desktopApp" class="item" :class="activeApp==item.appid?'activeApp':''">{{item.app_name}}</div>
 		</div>
+		<context-menu ref="contextmenu">
+			<div>321</div>
+		</context-menu>
 		<div class="appicon" style="position: absolute;right: 0;height: 100%;">
 			<div class="item" @click="showDrawer">抽屉</div>
 		</div>
@@ -43,40 +46,9 @@
 					this.$store.commit("windowData/setVisible", item.appid)
 				}
 			},
-			// 桌面右键点击
-			handleRightClick: function(e,item) {
-				let that = this
-				let xVal = e.clientX
-				let yVal = e.clientY
-				// 菜单信息
-				let contextMenuInfo = {
-					isShow: true,
-					x: xVal,
-					y: yVal,
-					target: 'desktop',
-					list: [{
-						name: 'openVideo',
-						icon: {
-							type: '',
-							style: ''
-						},
-						text: '关闭',
-						enable: true,
-						action: {
-							type: 'callback',
-							handler: function() {
-								
-								contextMenuInfo.isShow = false
-							}
-						}
-					}]
-				}
-				// 广播事件
-				this.$store.commit("windowData/setContextMenu", contextMenuInfo)
-			},
 		},
 		created() {
-
+			
 		}
 	}
 </script>

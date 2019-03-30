@@ -9,7 +9,6 @@ export default {
 		openApp: [],
 		activeApp: 0,
 		showDrawer: false,
-		contextMenu: {}
 	},
 	mutations: {
 		setdata(state, val) {
@@ -99,9 +98,6 @@ export default {
 		},
 		setShowDrawer(state, val) {
 			state.showDrawer = !state.showDrawer
-		},
-		setContextMenu(state, val) {
-			state.contextMenu = val
 		},
 	},
 }

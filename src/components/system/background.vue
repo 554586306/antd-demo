@@ -1,5 +1,5 @@
 <template>
-	<div :style="setImg" class="desktop-bg" @contextmenu.stop.prevent="handleRightClick($event)"></div>
+	<div :style="setImg" class="desktop-bg"></div>
 </template>
 
 <script>
@@ -28,43 +28,6 @@
 		},
 		methods: {
 			
-			// 桌面右键点击
-			handleRightClick: function(e) {
-				let that = this
-				let xVal = e.clientX
-				let yVal = e.clientY
-				// 菜单信息
-				let contextMenuInfo = {
-					isShow: true,
-					x: xVal,
-					y: yVal,
-					target: 'desktop',
-					list: [{
-						name: 'openVideo',
-						icon: {
-							type: '',
-							style: ''
-						},
-						text: '下一个背景',
-						enable: true,
-						action: {
-							type: 'callback',
-							handler: function() {
-								that.num ++
-								contextMenuInfo.isShow = false
-							}
-						}
-					},{
-						text: '打开文件1',
-					},{
-						text: '打开文件2',
-					},{
-						text: '打开文件3',
-					}]
-				}
-				// 广播事件
-				this.$store.commit("windowData/setContextMenu", contextMenuInfo)
-			},
 		},
 	}
 </script>

@@ -30,17 +30,14 @@
 			changesize,
 		},
 		watch: {
-			// activeApp: function(bool) {
-// 				if (bool) {
-// 					this.$store.commit("windowData/setzIndex");
-// 					this.zIndex = this.$store.state.windowData.zIndex;
-// 				}
-			// }
+// 			closeApp: function(bool) {
+// 				this.close()
+// 			}
 		},
 		computed: {
-			activeApp: function() {
+			activeApp() {
 				return this.$store.state.windowData.activeApp == this.appid;
-			}
+			},
 		},
 		methods: {
 			changeMax(bool){
