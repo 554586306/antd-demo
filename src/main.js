@@ -6,11 +6,11 @@ import "./static/css/common.css";
 Vue.use(Antd);
 
 import store from  './store/store'
+
 import floder from  './components/system/floder/floder.js'
 Vue.prototype.$floder = floder
-
-import contextMenu from  './components/system/contextMenu'
-Vue.use(contextMenu)
+import contextMenu from  './components/system/contextMenu/contextMenu.js'
+Vue.prototype.$contextMenu = contextMenu
 
 Vue.config.productionTip = false
 

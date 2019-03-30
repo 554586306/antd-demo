@@ -2,11 +2,8 @@
 	<div class="menu-bar" :style="{height:height+'px'}">
 		<div style="width: 50px;"></div>
 		<div class="appicon">
-			<div v-contextmenu:contextmenu @click="activeapp(item)" v-for="(item,index) in desktopApp" class="item" :class="activeApp==item.appid?'activeApp':''">{{item.app_name}}</div>
+			<div @contextmenu.stop.prevent="openContextMenu($event,item)" @click="activeapp(item)" v-for="(item,index) in desktopApp" class="item" :class="activeApp==item.appid?'activeApp':''">{{item.app_name}}</div>
 		</div>
-		<context-menu ref="contextmenu">
-			<div>321</div>
-		</context-menu>
 		<div class="appicon" style="position: absolute;right: 0;height: 100%;">
 			<div class="item" @click="showDrawer">抽屉</div>
 		</div>
@@ -21,6 +18,7 @@
 		data() {
 			return {
 				height: initData.height,
+				clossApp: {}
 			}
 		},
 		computed: {
@@ -32,6 +30,17 @@
 			},
 		},
 		methods: {
+			closeApp(){
+				console.log(item)
+			},
+			openContextMenu(e,item){
+				this.clossApp = item
+				this.$contextMenu({e,
+					list:[
+						{icon:'1',text:'关闭窗口',action:this.closeApp}
+					]
+				})
+			},
 			showDrawer() {
 				this.$store.commit("windowData/setShowDrawer")
 			},

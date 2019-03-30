@@ -6,15 +6,14 @@ const getReference = (el, binding, vnode) => {
       contextmenu[0].$refs.reference = el;
     } else {
       contextmenu.$refs.reference = el;
-			console.log(contextmenu)
     }
   }
 };
 
 export default {
-  bind(el, binding, vnode) {
-    getReference(el, binding, vnode);
-  },
+//   bind(el, binding, vnode) {
+//     getReference(el, binding, vnode);
+//   },
   inserted(el, binding, vnode) {
     getReference(el, binding, vnode);
   }

@@ -1,11 +1,10 @@
 <template>
 	<transition name="context">
-		<div class="con" v-if="isShow" ref="contextMenu">
-			<slot></slot>
-			<!-- <div class="item">
-				<span class="icon">i</span>
-				<span class="text"></span>
-			</div> -->
+		<div class="contextMenu" v-if="visible" :style="{top:top+'px',left:left+'px'}">
+			<div class="item" v-for="(item,key) in list" @click="item.action">
+				<span class="icon">{{item.icon}}</span>
+				<span class="text">{{item.text}}</span>
+			</div>
 		</div>
 	</transition>
 </template>
@@ -14,56 +13,37 @@
 	export default {
 		name: 'contextMenu',
 		props: {
-		  reference: {},
 		},
 		data() {
 			return {
-				isShow: false,
+				visible: false,
+				top: 0,
+				left: 0,
 			}
 		},
+		watch:{
+		},
 		computed: {
-			
 		},
 		methods: {
-			doToggle(e) {
-				e.preventDefault();
-			  this.isShow = !this.isShow;
+			close() {
+				this.visible = false;
+				setTimeout(() => {
+					this.$destroy(true)
+					this.$el.parentNode.removeChild(this.$el) // 从DOM里将这个组件移除
+				}, 220)
 			},
 			handleDocumentClick(e) {
-// 			  let reference = this.reference || this.$refs.reference;
-// 			  const popper = this.popper || this.$refs.popper;
-// 			
-// 			  if (!reference && this.$slots.reference && this.$slots.reference[0]) {
-// 			    reference = this.referenceElm = this.$slots.reference[0].elm;
-// 			  }
-// 			  if (!this.$el ||
-// 			    !reference ||
-// 			    this.$el.contains(e.target) ||
-// 			    reference.contains(e.target) ||
-// 			    !popper ||
-// 			    popper.contains(e.target)) return;
-// 			  this.showPopper = false;
+				if(!this.$el.contains(e.target)){
+					this.close()
+				}
 			},
 		},
 		mounted(){
-			let reference = this.referenceElm = this.reference || this.$refs.reference;
-			console.log(this)
-			
-			// reference.addEventListener('contextmenu', this.doToggle)
-// 			document.addEventListener('click', this.handleDocumentClick)
-			
-// 			document.onclick = (e)=>{
-// 				if(!this.$el.contains(e.target)){
-// 					console.log('yes')
-// 					this.isShow = false
-// 				}
-// 			}
+			document.addEventListener('mousedown',this.handleDocumentClick)
 		},
 		destroyed() {
-			// const reference = this.reference;
-			
-// 			reference.removeEventListener('contextmenu', this.doToggle)
-// 			document.removeEventListener('click', this.handleDocumentClick)
+			document.removeEventListener('mousedown', this.handleDocumentClick)
 		}
 	}
 </script>
@@ -85,12 +65,10 @@
 		opacity: 0;
 	}
 
-	.con {
+	.contextMenu {
 		width: 150px;
 		background: #fff;
 		position: fixed;
-		top: 100px;
-		left: 0;
 		box-shadow: 0 0 5px rgba(0, 0, 0, .5);
 		border-radius: 2px;
 		z-index: 1001;
@@ -105,6 +83,9 @@
 				text-align: center;
 				display: inline-block;
 				border-right: 1px solid #eee;
+			}
+			.text{
+				padding-left: 10px;
 			}
 			&:last-child {
 				border-bottom: none;
