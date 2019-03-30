@@ -18,7 +18,7 @@
 		data() {
 			return {
 				height: initData.height,
-				clossApp: {}
+				item: {}
 			}
 		},
 		computed: {
@@ -31,10 +31,11 @@
 		},
 		methods: {
 			closeApp(){
-				console.log(item)
+				console.log(this.item)
+				this.$store.commit("windowData/setCloseApp", this.item.appid)
 			},
 			openContextMenu(e,item){
-				this.clossApp = item
+				this.item = item
 				this.$contextMenu({e,
 					list:[
 						{icon:'1',text:'关闭窗口',action:this.closeApp}

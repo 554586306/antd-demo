@@ -30,13 +30,16 @@
 			changesize,
 		},
 		watch: {
-// 			closeApp: function(bool) {
-// 				this.close()
-// 			}
+			closeApp: function(bool) {
+				this.close()
+			}
 		},
 		computed: {
 			activeApp() {
 				return this.$store.state.windowData.activeApp == this.appid;
+			},
+			closeApp() {
+				return this.$store.state.windowData.closeApp == this.appid;
 			},
 		},
 		methods: {

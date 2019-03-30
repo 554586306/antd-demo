@@ -9,6 +9,7 @@ export default {
 		openApp: [],
 		activeApp: 0,
 		showDrawer: false,
+		closeApp: 0,
 	},
 	mutations: {
 		setdata(state, val) {
@@ -98,6 +99,9 @@ export default {
 		},
 		setShowDrawer(state, val) {
 			state.showDrawer = !state.showDrawer
+		},
+		setCloseApp(state, val) {
+			state.closeApp = val
 		},
 	},
 }

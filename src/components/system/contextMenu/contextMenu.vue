@@ -1,7 +1,7 @@
 <template>
 	<transition name="context">
 		<div class="contextMenu" v-if="visible" :style="{top:top+'px',left:left+'px'}">
-			<div class="item" v-for="(item,key) in list" @click="item.action">
+			<div class="item" v-for="(item,key) in list" @click="conClick(item)">
 				<span class="icon">{{item.icon}}</span>
 				<span class="text">{{item.text}}</span>
 			</div>
@@ -26,6 +26,10 @@
 		computed: {
 		},
 		methods: {
+			conClick(item){
+				item.action()
+				this.close()
+			},
 			close() {
 				this.visible = false;
 				setTimeout(() => {
